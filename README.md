@@ -1,1 +1,5 @@
 # exercises
+
+* Hackerrank
+* Codewars
+* Codility
