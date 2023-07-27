@@ -1,4 +1,4 @@
-function arrListLen(A: Array<number>) {
+function arrListLen(A: number[]) {
   let length = 1;
   let index = A[0];
   while (index !== -1) {
@@ -8,3 +8,5 @@ function arrListLen(A: Array<number>) {
 
   return length;
 }
+
+// arrListLen([1, 5, 6]);
