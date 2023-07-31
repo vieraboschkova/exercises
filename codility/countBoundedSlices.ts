@@ -1,5 +1,5 @@
 // Complexity O(n**2), passes 70%
-function countBoundedSlices(K: number, A: number[]) {
+function countBoundedSlices(K: number, A: number[]): number {
   // Implement your solution here
   let pairs = 0;
   for (let i = 0; i < A.length; i++) {
