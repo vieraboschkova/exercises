@@ -1,49 +1,41 @@
-// you can write to stdout for debugging purposes, e.g.
-// console.log('this is a debug message');
-
-function solution(A: number, B: number): string {
-  // Implement your solution here
+// Passes 100%
+interface Count {
+  [key: string]: number;
+}
+function threeLetters(A: number, B: number): string {
   if (A === B) {
     return "ab".repeat(A);
   }
   if (A === 0) return "b".repeat(B);
-  if (B === 0) return "a".repeat(B);
-  // case = B = 1 // A = 1 and 0
-  if (B === 1) {
-    // let
-    // TODO: fiiiix
-  }
+  if (B === 0) return "a".repeat(A);
 
-  let count: { a: number; b: number } = { b: B === 1 ? 0 : B - 2, a: A };
-  let arr = [B === 1 ? "b" : "bb"];
-  // console.log(count)
-  let next = "a";
-  if (A < B) {
-    count = { a: A === 1 ? 0 : A - 2, b: B };
-    arr = [A === 1 ? "a" : "aa"];
-    next = "a";
-  }
+  const count: Count = { b: B, a: A };
+  let str = "";
+  let next = A > B ? "a" : "b";
 
+  // Loop until both numbers are zeroed
   while (count.a > 0 || count.b > 0) {
-    // console.log('********')
-    // console.log(next)
-
-    for (let i = 0; i < 4; i++) {
-      if (count[next] > 0) {
-        if (i % 2 === 0) {
-          arr.push(next);
-        } else {
-          arr.unshift(next);
-        }
-        count[next]--;
-      } else {
-        break;
-      }
+    // If there is double letter already, change next
+    if (str.endsWith(next.repeat(2))) {
+      next = next === "a" ? "b" : "a";
+      continue;
     }
-    next = next === "a" ? "b" : "a";
-    // console.log(count[next])
+    // If there aint no more letters to add, change next
+    if (count[next] === 0) {
+      next = next === "a" ? "b" : "a";
+      // If the count of the nex to add is bigger or equal to the other
+      // Add to string  but do not change the next (and change count)
+    } else if (count[next] >= count[next === "a" ? "b" : "a"]) {
+      str = str.concat(next);
+      count[next]--;
+      // Add, substract from count and change next
+    } else {
+      str = str.concat(next);
+      count[next]--;
+      next = next === "a" ? "b" : "a";
+    }
   }
-  return arr.join("");
+  return str;
 }
 
-console.log(solution(1, 5));
+// console.log(threeLetters(1, 4));
